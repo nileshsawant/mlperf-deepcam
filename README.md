@@ -34,7 +34,6 @@ For *summarizing* the dataset (i.e. computing summary statistics for input norma
 
 For Kestrel users, do the following in your project directory:
 ```bash
-module load anaconda3/2024.06.1
 cp /nopt/nrel/apps/examples/python_envs/deepcamKestrel.tar.gz . 
 mkdir -p torchParallelMPIdeepcam
 tar -xzf deepcamKestrel.tar.gz -C torchParallelMPIdeepcam
@@ -70,34 +69,53 @@ Following a similar structure can greatly simplify the process of editing paths 
 Submission scripts are in `src/deepCam/run_scripts`.
 Use `run_training_kestrel.sh` for 2 node 4 GPU per node. Use `run_training_kestrel_oneGPUperNode.sh` for 2 node 1 GPU per node job. Please check all the paths carefully and modify according to the locations of your training data and the location of your python environment. At the minimum, you are needed to replace the username `nsawant` with your own.
 
-## ~~How to run the benchmark~~
-
-~~Submission scripts are in `src/deepCam/run_scripts`.~~
-
-### Running at NERSC
-
-~~To submit to the Cori KNL system, set up a conda env called
-`mlperf_deepcam` which contains all the prereqs, such as `h5py`, `wandb` and `basemap`.
-Please edit the entries~~
-
-```bash
-export PROJ_LIB=/global/homes/t/tkurth/.conda/envs/mlperf_deepcam/share/basemap
-export PYTHONPATH=/global/homes/t/tkurth/.conda/envs/mlperf_deepcam/lib/python3.7/site-packages:${PYTHONPATH}
-```
-
-in `src/deepCam/run_scripts/run_training_cori.sh` to point to the correct paths and add 
+Edit `src/deepCam/run_scripts/run_training_kestrel.sh` to point to the correct paths and add 
 
 ```bash
 --wandb_certdir <my-cert-dir>
 ```
 to the arguments passed to the python training script. Here, `<my-cert-dir>`
 should point to the directory which contains the `.wandbirc` file created before.
-Then run
+
+You are now ready to make a test run:
 
 ```bash
+sbatch run_training_kestrel.sh
+```
+
+The job should run for 10 minutes and exit. If successful, please resubmit with a longer wall time.
+
+
+## ~~How to run the benchmark~~
+
+~~Submission scripts are in `src/deepCam/run_scripts`.~~
+
+### ~~Running at NERSC~~
+
+~~To submit to the Cori KNL system, set up a conda env called
+`mlperf_deepcam` which contains all the prereqs, such as `h5py`, `wandb` and `basemap`.
+Please edit the entries~~
+
+```bash
+# DEPRECATED: These exports are no longer needed for Kestrel
+# export PROJ_LIB=/global/homes/t/tkurth/.conda/envs/mlperf_deepcam/share/basemap
+# export PYTHONPATH=/global/homes/t/tkurth/.conda/envs/mlperf_deepcam/lib/python3.7/site-packages:${PYTHONPATH}
+```
+
+~~in `src/deepCam/run_scripts/run_training_cori.sh` to point to the correct paths and add~~ 
+
+```bash
+# --wandb_certdir <my-cert-dir>
+```
+~~to the arguments passed to the python training script. Here, `<my-cert-dir>`
+should point to the directory which contains the `.wandbirc` file created before.
+Then run~~
+
+```bash
+# DEPRECATED: These exports are no longer needed for Kestrel
 # This example runs on 64 nodes.
-cd src/deepCam/run_scripts
-sbatch -N 64 run_training_cori.sh
+# cd src/deepCam/run_scripts
+# sbatch -N 64 run_training_cori.sh
 ```
 
 ### Using Docker
