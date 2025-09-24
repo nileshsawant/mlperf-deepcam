@@ -116,7 +116,12 @@ class CamVisualizer(object):
             self.my_map.drawparallels(np.arange(-90, 90, 30), labels =[1,0,0,0], ax=ax)
     
             # Plot legend and title
-            lines = [tc_contour.collections[0], ar_contour.collections[0]]
+            #lines = [tc_contour.collections[0], ar_contour.collections[0]]
+            if hasattr(tc_contour, 'collections'):
+                lines = [tc_contour.collections[0], ar_contour.collections[0]]
+            else:
+                lines = [tc_contour.legend_elements()[0][0], ar_contour.legend_elements()[0][0]]
+            
             labels = ['Tropical Cyclone', "Atmospheric River"]
             ax.legend(lines, labels, loc='upper center', bbox_to_anchor=(0.5, -0.05), ncol=2)
 
