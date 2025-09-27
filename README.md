@@ -35,9 +35,9 @@ For *summarizing* the dataset (i.e. computing summary statistics for input norma
 For Kestrel users, do the following in your project directory:
 ```bash
 cp /nopt/nrel/apps/examples/python_envs/deepcamKestrel.tar.gz . 
-mkdir -p torchParallelMPIdeepcam
-tar -xzf deepcamKestrel.tar.gz -C torchParallelMPIdeepcam
-source torchParallelMPIdeepcam/bin/activate
+mkdir -p deepcam_env
+tar -xzf deepcamKestrel.tar.gz -C deepcam_env
+source deepcam_env/bin/activate
 conda-unpack
 ```
 The `torchParallelMPIdeepcam` has all the dependencies to run to run this benchmark. Please proceed 
@@ -83,7 +83,7 @@ You are now ready to make a test run:
 sbatch run_training_kestrel.sh
 ```
 
-The job should run for 10 minutes and exit. If successful, please resubmit with a longer wall time.
+The job can run for 10 minutes to test if all paths have been set correctly. If successful, please resubmit with a longer wall time.
 
 
 ## ~~How to run the benchmark~~
