@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -A esifapps
 #SBATCH -J train_cam5
-#SBATCH -t 00:10:00
+#SBATCH -t 48:00:00
 ##SBATCH -p gpu-h100
 ##SBATCH -p debug
 #SBATCH --nodes=2
@@ -35,8 +35,8 @@
 module load anaconda3/2024.06.1
 module load nccl/2.21.5
 
-conda activate /projects/hpcapps/nsawant/torchParallelMPIdeepcam
-export PYTHONPATH=/projects/hpcapps/nsawant/torchParallelMPIdeepcam/lib/python3.13/site-packages:${PYTHONPATH}
+source /projects/hpcapps/nsawant/deepcam_env/bin/activate
+export PYTHONPATH=/projects/hpcapps/nsawant/deepcam_env/lib/python3.13/site-packages:${PYTHONPATH}
 
 rankspernode=${SLURM_NTASKS_PER_NODE}
 totalranks=$(( ${SLURM_NNODES} * ${rankspernode} ))
